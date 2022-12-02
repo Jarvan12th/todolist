@@ -3,9 +3,9 @@
         <nav>header</nav>
         <nav>main</nav>
         <nav>footer</nav>
-        <div>A week contains {{ data.num }} days</div>
-        <div>They are {{ data.arr }}</div>
-        <div>Today is {{ data.today }}, {{ data.obj.date }}</div>
+        <div>A week contains {{ num }} days</div>
+        <div>They are {{ arr }}</div>
+        <div>Today is {{ today }}, {{ obj.date }}</div>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
 import NavHeaderVue from '@/components/navHeader/NavHeader.vue';
 import NavMainVue from '@/components/navMain/NavMain.vue';
 import NavFooterVue from '@/components/navFooter/NavFooter.vue';
-import {defineComponent, ref, reactive} from 'vue'
+import {defineComponent, ref, reactive, toRefs} from 'vue'
 export default defineComponent({
     name: 'Home',
     props: {},
@@ -32,7 +32,7 @@ export default defineComponent({
             }
         })
         return {
-            data
+            ...toRefs(data)
         }
     }
 })
