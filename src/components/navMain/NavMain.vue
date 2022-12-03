@@ -1,14 +1,14 @@
 <template>
     <div v-for="(item, index) in list" :key="index">
-        <div>
+        <div class="item">
             <input type="checkbox" v-model="item.isCompleted"> {{ item.task }}
-            <button>Delete</button>
+            <button class="del" @click="del(item, index)">Delete</button>
         </div>
     </div>
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
     name: 'navMain',
@@ -27,8 +27,12 @@ export default defineComponent({
                 isCompleted: false
             }
         ])
+        let del = (item, index) => {
+            console.log(item)
+            console.log(index)
+        }
         return {
-            list
+            list, del
         }
     }
 })
