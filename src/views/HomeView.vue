@@ -10,7 +10,8 @@
 import NavHeader from '@/components/navHeader/NavHeader.vue';
 import NavMain from '@/components/navMain/NavMain.vue';
 import NavFooter from '@/components/navFooter/NavFooter.vue';
-import {defineComponent, ref, reactive, toRefs} from 'vue'
+import {defineComponent, ref, reactive, toRefs, computed} from 'vue';
+import { useStore } from 'vuex';
 export default defineComponent({
     name: 'Home',
     props: {},
@@ -20,8 +21,12 @@ export default defineComponent({
         NavFooter
     },
     setup(props, ctx) {
+        let store = useStore()
+        let list = computed(() => {
+            return store.state.list
+        })
         return {
-            
+            list
         }
     }
 })
