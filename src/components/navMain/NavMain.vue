@@ -12,27 +12,19 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
     name: 'navMain',
+    props: {
+        list: {
+            typeof: Array,
+            required: true
+        }
+    },
     setup(props, ctx) {
-        let list = ref([
-            {
-                task: 'coding',
-                isCompleted: false
-            },
-            {
-                task: 'playing',
-                isCompleted: false
-            },
-            {
-                task: 'talking',
-                isCompleted: false
-            }
-        ])
         let del = (item, index) => {
             console.log(item)
             console.log(index)
         }
         return {
-            list, del
+            del
         }
     }
 })

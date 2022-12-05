@@ -12,7 +12,7 @@ export default defineComponent({
     setup(props, ctx) {
         let value = ref('')
         let enter = () => {
-            console.log(value.value)
+            ctx.emit('add', value.value)
         }
         return {
             value,

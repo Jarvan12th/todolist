@@ -1,8 +1,8 @@
 <template>
     <div>
-        <nav-header></nav-header>
-        <nav-main></nav-main>
-        <nav-footer></nav-footer>
+        <nav-header @add="add"></nav-header>
+        <nav-main :list="list"></nav-main>
+        <nav-footer :list="list"></nav-footer>
     </div>
 </template>
 
@@ -10,9 +10,9 @@
 import NavHeader from '@/components/navHeader/NavHeader.vue';
 import NavMain from '@/components/navMain/NavMain.vue';
 import NavFooter from '@/components/navFooter/NavFooter.vue';
-import { defineComponent, ref, reactive, toRefs, computed } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { computed } from '@vue/reactivity';
 import { useStore } from 'vuex';
-import { useRoute, useRouter } from 'vue-router';
 export default defineComponent({
     name: 'Home',
     props: {},
@@ -23,14 +23,18 @@ export default defineComponent({
     },
     setup(props, ctx) {
         let store = useStore()
-        let router = useRouter()
-        let route = useRoute()
-        console.log(route.query)
         let list = computed(() => {
             return store.state.list
         })
+        let value = ref('')
+        let add = (val) => {
+            value.value = val
+            console.log(val)
+        }
         return {
-            list
+            list,
+            add,
+            value
         }
     }
 })
