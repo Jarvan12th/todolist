@@ -1,8 +1,8 @@
 <template>
     <div>
         <nav-header @add="add"></nav-header>
-        <nav-main :list="list"></nav-main>
-        <nav-footer :list="list"></nav-footer>
+        <nav-main :list="list" @del="del"></nav-main>
+        <nav-footer :list="list" @clear="clear"></nav-footer>
     </div>
 </template>
 
@@ -29,12 +29,32 @@ export default defineComponent({
         let value = ref('')
         let add = (val) => {
             value.value = val
-            console.log(val)
+            let flag = true
+            list.value.map(item => {
+                if (item.task === value.value) {
+                    flag = false
+                    alert('task has already existed!')
+                }
+            })
+            if (flag) {
+                    store.commit('addTodo', {
+                    task: value.value,
+                    isCompleted: false
+                })
+            }
+        }
+        let del = (index) => {
+            store.commit('deleteTodo', index)
+        }
+        let clear = (list) => {
+            store.commit('clearTodo', list)
         }
         return {
             list,
             add,
-            value
+            value,
+            del,
+            clear
         }
     }
 })

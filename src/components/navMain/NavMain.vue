@@ -1,10 +1,13 @@
 <template>
-    <div v-for="(item, index) in list" :key="index">
-        <div class="item">
-            <input type="checkbox" v-model="item.isCompleted"> {{ item.task }}
-            <button class="del" @click="del(item, index)">Delete</button>
+    <div v-if="(list.length > 0)">
+        <div v-for="(item, index) in list" :key="index">
+            <div class="item">
+                <input type="checkbox" v-model="item.isCompleted"> {{ item.task }}
+                <button class="del" @click="del(item, index)">Delete</button>
+            </div>
         </div>
     </div>
+    <div v-else>Currently no any task</div>
 </template>
 
 <script>
@@ -18,10 +21,10 @@ export default defineComponent({
             required: true
         }
     },
+    emits: ['del'],
     setup(props, ctx) {
         let del = (item, index) => {
-            console.log(item)
-            console.log(index)
+            ctx.emit('del', index)
         }
         return {
             del

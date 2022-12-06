@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { computed } from '@vue/reactivity'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -21,14 +22,20 @@ export default defineComponent({
         }
     },
     setup(props, ctx) {
-        let done = ref(1)
-        let all = ref(3)
+        let done = computed(() => {
+            let arr = props.list.filter(item => {
+                return item.isCompleted
+            })
+            return arr.length
+        })
         let clear = () => {
-            console.log('clear')
+            let arr = props.list.filter(item => {
+                return item.isCompleted === false
+            })
+            ctx.emit('clear', arr)
         }
         return {
             done,
-            all,
             clear
         }
     }

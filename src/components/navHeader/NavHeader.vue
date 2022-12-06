@@ -13,6 +13,7 @@ export default defineComponent({
         let value = ref('')
         let enter = () => {
             ctx.emit('add', value.value)
+            value.value = ''
         }
         return {
             value,
